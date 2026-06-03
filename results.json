@@ -19833,6 +19833,7 @@
 						"name": "Csankó Péter Tibor",
 						"bga_username": null,
 						"display_preference": "name",
+						"qualification": "Székesfehérvári selejtező",
 						"active": 1,
 						"dropout_round": null
 					},
@@ -19841,6 +19842,7 @@
 						"name": "Ősz Olivér",
 						"bga_username": null,
 						"display_preference": "name",
+						"qualification": "Veszprémi selejtező",
 						"active": 1,
 						"dropout_round": null
 					},
@@ -19849,6 +19851,7 @@
 						"name": "Krizsán András",
 						"bga_username": null,
 						"display_preference": "name",
+						"qualification": "Balmazújvárosi selejtező",
 						"active": 1,
 						"dropout_round": null
 					},
@@ -19857,6 +19860,7 @@
 						"name": "Dávid Zsolt",
 						"bga_username": null,
 						"display_preference": "name",
+						"qualification": "Szegedi selejtező",
 						"active": 1,
 						"dropout_round": null
 					},
@@ -19865,6 +19869,7 @@
 						"name": "Hegyes Vivien",
 						"bga_username": null,
 						"display_preference": "name",
+						"qualification": "Zsámbéki selejtező",
 						"active": 1,
 						"dropout_round": null
 					},
@@ -19873,6 +19878,7 @@
 						"name": "Majdanics Attila",
 						"bga_username": null,
 						"display_preference": "name",
+						"qualification": "Győri selejtező",
 						"active": 1,
 						"dropout_round": null
 					},
@@ -19881,6 +19887,7 @@
 						"name": "Újvári Dániel",
 						"bga_username": null,
 						"display_preference": "name",
+						"qualification": "Esztergomi selejtező",
 						"active": 1,
 						"dropout_round": null
 					},
@@ -19889,6 +19896,7 @@
 						"name": "Andrónyi Ármin",
 						"bga_username": null,
 						"display_preference": "name",
+						"qualification": "Soproni selejtező",
 						"active": 1,
 						"dropout_round": null
 					},
@@ -19897,6 +19905,7 @@
 						"name": "Steinbach Ákos",
 						"bga_username": null,
 						"display_preference": "name",
+						"qualification": "Soproni selejtező",
 						"active": 1,
 						"dropout_round": null
 					},
@@ -19905,6 +19914,7 @@
 						"name": "Magyar Éva",
 						"bga_username": null,
 						"display_preference": "name",
+						"qualification": "Szombathelyi selejtező",
 						"active": 1,
 						"dropout_round": null
 					},
@@ -19913,6 +19923,7 @@
 						"name": "Nagy Ákos",
 						"bga_username": null,
 						"display_preference": "name",
+						"qualification": "Nagyoroszi selejtező",
 						"active": 1,
 						"dropout_round": null
 					},
@@ -19921,6 +19932,7 @@
 						"name": "Hugyecz Ákos",
 						"bga_username": null,
 						"display_preference": "name",
+						"qualification": "Nyíregyházi selejtező",
 						"active": 1,
 						"dropout_round": null
 					},
@@ -19929,6 +19941,7 @@
 						"name": "Kertész Dávid",
 						"bga_username": null,
 						"display_preference": "name",
+						"qualification": "Pécsi selejtező",
 						"active": 1,
 						"dropout_round": null
 					},
@@ -19937,6 +19950,7 @@
 						"name": "Eperjesi Gergely",
 						"bga_username": null,
 						"display_preference": "name",
+						"qualification": "Miskolci selejtező",
 						"active": 1,
 						"dropout_round": null
 					},
@@ -19945,6 +19959,7 @@
 						"name": "Pusztai Péter",
 						"bga_username": null,
 						"display_preference": "name",
+						"qualification": "Békéscsabai selejtező",
 						"active": 1,
 						"dropout_round": null
 					},
@@ -19953,6 +19968,7 @@
 						"name": "Szűcs Tímea",
 						"bga_username": null,
 						"display_preference": "name",
+						"qualification": "Kecskeméti selejtező",
 						"active": 1,
 						"dropout_round": null
 					},
@@ -19961,6 +19977,7 @@
 						"name": "Kovács Péter",
 						"bga_username": null,
 						"display_preference": "name",
+						"qualification": "Jászberényi selejtező",
 						"active": 1,
 						"dropout_round": null
 					},
@@ -19969,6 +19986,7 @@
 						"name": "Faragó Csaba",
 						"bga_username": null,
 						"display_preference": "name",
+						"qualification": "Budapesti selejtező",
 						"active": 1,
 						"dropout_round": null
 					},
@@ -19977,6 +19995,7 @@
 						"name": "Molnár Renáta",
 						"bga_username": null,
 						"display_preference": "name",
+						"qualification": "Budapesti selejtező",
 						"active": 1,
 						"dropout_round": null
 					},
@@ -19985,6 +20004,7 @@
 						"name": "Tihon József",
 						"bga_username": null,
 						"display_preference": "name",
+						"qualification": "Budapesti selejtező",
 						"active": 1,
 						"dropout_round": null
 					},
@@ -19993,6 +20013,7 @@
 						"name": "Illés Róbert",
 						"bga_username": null,
 						"display_preference": "name",
+						"qualification": "Címvédő",
 						"active": 1,
 						"dropout_round": null
 					},
@@ -20001,6 +20022,7 @@
 						"name": "Kocsis-Bakti Ruben",
 						"bga_username": null,
 						"display_preference": "name",
+						"qualification": "Online bajnok",
 						"active": 1,
 						"dropout_round": null
 					}
