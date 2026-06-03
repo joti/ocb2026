@@ -1,0 +1,1065 @@
+<!doctype html>
+<html lang="hu">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Országos Carcassonne Bajnokság 2026</title>
+  <style>
+    :root {
+      --bg: #ffffff;
+      --card: #ffffff;
+      --text: #1f2a1f;
+      --muted: #667066;
+      --line: #dfe5d8;
+      --green: #2f7d32;
+      --green-soft: #e8f4e6;
+      --red: #a62828;
+      --gold: #b8860b;
+      --shadow: 0 2px 8px rgba(0,0,0,.05);
+      --radius: 14px;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: "Frank Ruhl Libre", Arial, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.45;
+    }
+
+    .page {
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: 18px;
+    }
+
+    header {
+      margin-bottom: 18px;
+    }
+
+    h1 {
+      margin: 0 0 6px;
+      font-size: clamp(1.5rem, 3vw, 2.2rem);
+      letter-spacing: -.02em;
+    }
+
+    .lead {
+      margin: 0;
+      color: var(--muted);
+    }
+
+    .layout {
+      display: grid;
+      grid-template-columns: 280px minmax(0, 1fr);
+      gap: 18px;
+      align-items: start;
+    }
+
+    .panel, .card {
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+    }
+
+    .panel {
+      padding: 12px;
+      position: sticky;
+      top: 12px;
+    }
+
+    .panel h2 {
+      margin: 4px 6px 10px;
+      font-size: 1rem;
+    }
+
+    .qualifier-list {
+      display: grid;
+      gap: 8px;
+    }
+
+    .qualifier-button {
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      background: #fff;
+      padding: 8px 9px;
+      text-align: left;
+      cursor: pointer;
+      color: var(--text);
+      transition: .12s ease;
+      width: 100%;
+    }
+
+    .qualifier-button:hover {
+      border-color: #b9c8b1;
+      transform: translateY(-1px);
+    }
+
+    .qualifier-button.active {
+      border-color: var(--green);
+      background: var(--green-soft);
+    }
+
+    .qualifier-name {
+      font-weight: 600;
+      font-size: .94rem;
+      display: block;
+    }
+
+    .qualifier-meta {
+      display: block;
+      color: var(--muted);
+      font-size: .8rem;
+      margin-top: 1px;
+    }
+
+    .content {
+      min-width: 0;
+    }
+
+    .card {
+      padding: 16px;
+      margin-bottom: 18px;
+    }
+
+	.finals-section {
+	  margin-bottom: 24px;
+	}
+	
+    .tournament-title-row {
+      display: flex;
+      justify-content: space-between;
+      gap: 16px;
+      align-items: flex-start;
+      margin-bottom: 12px;
+    }
+
+	.tournament-section h2 {
+		font-size: 1.35rem;
+		font-weight: 700;
+		margin: 0 0 12px 0;
+	}
+
+    h2, h3 {
+      margin-top: 0;
+      letter-spacing: -.01em;
+    }
+
+    h2 {
+      margin-bottom: 4px;
+      font-size: 1.55rem;
+    }
+
+    h3 {
+      margin-bottom: 12px;
+      font-size: 1.15rem;
+    }
+
+    .meta-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 10px;
+      margin-top: 12px;
+    }
+
+    .meta-box {
+      background: #f8faf5;
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      padding: 10px;
+    }
+
+    .meta-label {
+      display: block;
+      color: var(--muted);
+      font-size: .78rem;
+      text-transform: uppercase;
+      letter-spacing: .04em;
+    }
+
+    .meta-value {
+      display: block;
+      font-weight: 450;
+      margin-top: 3px;
+    }
+
+    .table-wrap {
+      overflow-x: auto;
+      border: 1px solid var(--line);
+      border-radius: 12px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      background: #fff;
+      min-width: 500px;
+    }
+
+    th, td {
+      padding: 8px 9px;
+      border-bottom: 1px solid var(--line);
+      text-align: left;
+      vertical-align: top;
+      white-space: nowrap;
+    }
+
+    .standings-table {
+      min-width: 600px;
+      table-layout: auto;
+    }
+
+	
+    .standings-table th:nth-child(1),
+    .standings-table td:nth-child(1) {
+      width: 46px;
+    }
+
+    .standings-table th:nth-child(2),
+    .standings-table td:nth-child(2) {
+      min-width: 160px;
+      white-space: normal;
+    }
+
+    .standings-table th:nth-child(3),
+    .standings-table td:nth-child(3) {
+      text-align: center;
+    }
+
+    .standings-table th:nth-child(4),
+    .standings-table td:nth-child(4) {
+      text-align: center;
+    }
+
+    .standings-table th:nth-child(5),
+    .standings-table td:nth-child(5) {
+      text-align: center;
+    }
+
+    .standings-table th:nth-child(7),
+    .standings-table td:nth-child(7) {
+      text-align: center;
+    }
+
+    .standings-table th:nth-child(8),
+    .standings-table td:nth-child(8) {
+      text-align: center;
+    }
+
+    .standings-table .head-to-head-cell {
+      min-width: 150px;
+      max-width: 210px;
+      white-space: normal;
+      line-height: 1.28;
+      font-size: .82rem;
+    }
+
+    .standings-table .compact-head {
+      line-height: 1.12;
+      white-space: normal;
+      min-width: 86px;
+    }
+
+    .standings-table .diff-col {
+      min-width: 74px;
+      font-size: .87rem;
+    }
+
+    th {
+      background: #f1f5ec;
+      font-size: .85rem;
+      color: #3e4b3e;
+      position: sticky;
+      top: 0;
+      z-index: 1;
+    }
+
+    tr:last-child td {
+      border-bottom: 0;
+    }
+
+    td.num, th.num {
+      text-align: right;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .rank {
+      font-weight: 800;
+    }
+
+    .winner {
+      color: var(--gold);
+      font-weight: 850;
+    }
+
+    .muted {
+      color: var(--muted);
+    }
+
+    .positive {
+      color: var(--green);
+      font-weight: 700;
+    }
+
+    .negative {
+      color: var(--red);
+      font-weight: 700;
+    }
+
+    .round-tabs {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 12px;
+    }
+
+    .round-tab {
+      border: 1px solid var(--line);
+      background: #fff;
+      border-radius: 999px;
+      padding: 7px 11px;
+      cursor: pointer;
+      font-weight: 650;
+    }
+
+    .round-tab.active {
+      background: var(--green);
+      color: #fff;
+      border-color: var(--green);
+    }
+
+    .badge {
+      display: inline-block;
+      padding: 2px 7px;
+      border-radius: 999px;
+      background: #eef3ea;
+      color: #445144;
+      font-size: .78rem;
+      font-weight: 700;
+    }
+
+    .match-winner {
+      color: var(--green);
+      font-weight: 600;
+    }
+
+    .h2h-win {
+      color: var(--green);
+      font-weight: 400;
+      display: block;
+    }
+
+    .h2h-loss {
+      color: var(--red);
+      font-weight: 400;
+      display: block;
+    }
+
+    .h2h-draw {
+      color: var(--muted);
+      font-weight: 600;
+      display: block;
+    }
+
+    .rounds-table th,
+    .rounds-table td {
+      text-align: center;
+    }
+
+    .rounds-table th:nth-child(2),
+    .rounds-table td:nth-child(2),
+    .rounds-table th:nth-child(3),
+    .rounds-table td:nth-child(3) {
+      text-align: left;
+      width: 40%;
+      white-space: normal;
+    }
+
+    .rounds-table th:nth-child(1),
+    .rounds-table td:nth-child(1) {
+      width: 70px;
+    }
+
+    .rounds-table th:nth-child(4),
+    .rounds-table td:nth-child(4) {
+      width: 120px;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .bye {
+      color: var(--muted);
+      font-style: italic;
+    }
+
+    .error {
+      border: 1px solid #e4b4b4;
+      background: #fff4f4;
+      color: #6d1f1f;
+      padding: 14px;
+      border-radius: 12px;
+    }
+
+	.mobile-tournament-select {
+	  display: none;
+	}
+
+    @media (max-width: 820px) {
+      .page {
+        padding: 12px;
+      }
+
+      .layout {
+        grid-template-columns: 1fr;
+      }
+
+      .panel {
+        position: static;
+      }
+
+      .qualifier-list {
+        grid-template-columns: repeat(auto-fit, minmax(155px, 1fr));
+      }
+
+      .meta-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .tournament-title-row {
+        display: block;
+      }
+	  
+	  .rounds-table {
+		font-size: 0.9rem;
+	  }	  
+	  
+	  .mobile-tournament-select {
+		  display: block;
+	  }
+
+	  .mobile-tournament-select label {
+		  display: block;
+		  font-weight: 700;
+		  margin-bottom: 6px;
+	  }
+
+	  .mobile-tournament-select select {
+		  width: 100%;
+		  padding: 9px 10px;
+		  border: 1px solid var(--line);
+		  border-radius: 10px;
+		  background: #fff;
+		  font: inherit;
+	  }
+
+	  .finals-section,
+	  .qualifiers-section {
+		  display: none;
+	  }
+	  
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <header>
+      <p class="lead"> </p>
+    </header>
+
+    <div id="app">Betöltés…</div>
+  </div>
+
+  <script>
+    const DATA_URL = "results.json";
+
+    const labels = {
+      wins: "Győzelmek",
+      buchholzCut: "Buchholz <br>cut",
+      buchholzMedian: "Buchholz <br>median",
+      headToHead: "Egymás elleni",
+      pointDifference: "Össz. pont-<br>különbség",
+      starts: "Kezdések"
+    };
+
+    let tournaments = [];
+    let selectedTournamentId = null;
+    let selectedRoundNumber = null;
+	let places = [];
+	let cities = [];
+
+    init();
+
+    async function init() {
+      try {
+        const response = await fetch(DATA_URL, { cache: "no-store" });
+        if (!response.ok) throw new Error(`Nem sikerült betölteni: ${DATA_URL}`);
+        const json = await response.json();
+
+		places = json.data?.places || [];
+		cities = json.data?.cities || [];
+
+        tournaments = (json.data?.tournaments || [])
+          .sort((a, b) => {
+            const da = a.date || "";
+            const db = b.date || "";
+            if (da !== db) return da.localeCompare(db);
+            return (a.place_name || a.name || "").localeCompare(b.place_name || b.name || "", "hu");
+          });
+
+        if (!tournaments.length) throw new Error("Nem található selejtező a JSON-ben.");
+
+
+		const finalTournament = tournaments.find(t => t.type === "final");
+
+		selectedTournamentId =
+			finalTournament?.id ??
+			tournaments[0]?.id;
+		
+        selectedRoundNumber = getRounds(tournaments[0])[0]?.round_number || null;
+        render();
+      } catch (err) {
+        document.getElementById("app").innerHTML = `
+          <div class="error">
+            <strong>Hiba történt.</strong><br>
+            ${escapeHtml(err.message)}<br><br>
+            Ellenőrizd, hogy az exportált JSON fájl <code>results.json</code> néven ugyanabban a mappában van-e, mint az <code>index.html</code>.
+          </div>
+        `;
+      }
+    }
+
+    function render() {
+      const selected = tournaments.find(t => t.id === selectedTournamentId) || tournaments[0];
+      const rounds = getRounds(selected);
+      if (!selectedRoundNumber && rounds.length) selectedRoundNumber = rounds[0].round_number;
+
+      document.getElementById("app").innerHTML = `
+        <div class="layout">
+		  <aside class="panel">
+		    ${renderTournamentSelector(selected.id)}
+		  </aside>
+
+          <main class="content">
+            ${renderTournamentHeader(selected)}
+			${hasResults(selected)
+				? renderStandings(selected)
+				: renderParticipants(selected)}		
+			${getRounds(selected).length
+				? renderRounds(selected)
+				: ""}				
+          </main>
+        </div>
+      `;
+
+      document.querySelectorAll("[data-tournament-id]").forEach(btn => {
+        btn.addEventListener("click", () => {
+          selectedTournamentId = Number(btn.dataset.tournamentId);
+          const next = tournaments.find(t => t.id === selectedTournamentId);
+          selectedRoundNumber = getRounds(next)[0]?.round_number || null;
+          render();
+        });
+      });
+
+	  const tournamentSelect = document.getElementById("tournamentSelect");
+		if (tournamentSelect) {
+		  tournamentSelect.addEventListener("change", () => {
+			selectedTournamentId = Number(tournamentSelect.value);
+			const next = tournaments.find(t => t.id === selectedTournamentId);
+			selectedRoundNumber = getRounds(next)[0]?.round_number || null;
+			render();
+		  });
+	  }
+
+      document.querySelectorAll("[data-round-number]").forEach(btn => {
+        btn.addEventListener("click", () => {
+          selectedRoundNumber = Number(btn.dataset.roundNumber);
+          render();
+        });
+      });
+    }
+
+	function renderTournamentSelector(selectedId) {
+	  const finals = tournaments.filter(t => t.type === "final");
+	  const qualifiers = tournaments.filter(t => t.type === "qualifier");
+
+	  const selectorItems = [
+		  ...finals,
+		  ...qualifiers.slice().sort((a, b) =>
+			getTournamentDisplayName(a).localeCompare(getTournamentDisplayName(b), "hu")
+		  )
+	  ];
+
+	  return `
+		<div class="mobile-tournament-select">
+		  <label for="tournamentSelect">Verseny kiválasztása</label>
+		  <select id="tournamentSelect">
+			${selectorItems.map(t => `
+			  <option value="${t.id}" ${t.id === selectedId ? "selected" : ""}>
+				${t.type === "final" ? "Országos döntő" : "Selejtező"} - ${escapeHtml(getTournamentDisplayName(t))}
+			  </option>
+			`).join("")}
+		  </select>
+		</div>
+		${finals.length ? `
+		  <div class="tournament-section finals-section">
+			<h2>Országos döntő</h2>
+			<div class="qualifier-list finals-list">
+			  ${finals.map(t => renderQualifierButton(t, selectedId)).join("")}
+			</div>
+		  </div>
+		` : ""}
+
+		<div class="tournament-section qualifiers-section">
+		  <h2>Selejtezők</h2>
+		  <div class="qualifier-list">
+			${qualifiers.map(t => renderQualifierButton(t, selectedId)).join("")}
+		  </div>
+		</div>
+	  `;
+	}
+
+    function renderQualifierButton(t, selectedId) {
+      const name = getTournamentDisplayName(t);
+      const playerCount = getPlayerCount(t);
+      const date = formatDate(t.date);
+      const active = t.id === selectedId ? " active" : "";
+
+      return `
+        <button class="qualifier-button${active}" data-tournament-id="${t.id}">
+          <span class="qualifier-name">${escapeHtml(name)}</span>
+          <span class="qualifier-meta">${escapeHtml(date)}</span>
+        </button>
+      `;
+    }
+
+    function renderTournamentHeader(t) {
+	  const standings = getStandings(t);
+	  const winner = standings[0]?.player_name || standings[0]?.playerName || "–";
+	  const cancelled = isCancelledTournament(t);
+
+      return `
+        <section class="card">
+          <div class="tournament-title-row">
+            <div>
+              <h2>${escapeHtml(getTournamentDisplayName(t))}</h2>
+              <div class="muted">
+				  ${escapeHtml(formatDate(t.date))}
+				  ${getPlaceName(t) ? " • " + escapeHtml(getPlaceName(t)) : ""}
+			  </div>
+            </div>
+          </div>
+
+          <div class="meta-grid">
+            <div class="meta-box">
+              <span class="meta-label">Résztvevők</span>
+              <span class="meta-value">${getRealPlayerCount(t)} fő</span>
+            </div>
+
+			<div class="meta-box">
+				<span class="meta-label">Lebonyolítás</span>
+				<span class="meta-value">
+				  ${cancelled ? "A verseny elmaradt" : getTournamentFormatText(t)}
+				</span>				  
+			</div>
+			
+			${!cancelled && hasResults(t) ? `
+				<div class="meta-box">
+				  <span class="meta-label">Győztes</span>
+				  <span class="meta-value winner">
+					🏆 ${escapeHtml(winner)}
+				  </span>
+				</div>
+			` : ""}			
+          </div>
+        </section>
+      `;
+    }
+
+	function renderParticipants(t) {
+	  const players = getRealPlayers(t)
+		.slice()
+		.sort((a, b) => a.name.localeCompare(b.name, "hu"));
+
+	  return `
+		<section class="card">
+		  <h3>Résztvevők</h3>
+		  <div class="table-wrap">
+			<table class="standings-table">
+			  <thead>
+				<tr>
+				  <th class="num">#</th>
+				  <th>Név</th>
+				</tr>
+			  </thead>
+			  <tbody>
+				${players.map((p, index) => `
+				  <tr>
+					<td class="num">${index + 1}.</td>
+					<td>${escapeHtml(p.name)}</td>
+				  </tr>
+				`).join("")}
+			  </tbody>
+			</table>
+		  </div>
+		</section>
+	  `;
+	}
+
+    function renderStandings(t) {
+      const standings = getStandings(t);
+      const playerCount = getPlayerCount(t);
+      const columns = getTiebreakColumns(playerCount);
+      const derived = deriveStats(t);
+
+      return `
+        <section class="card">
+          <h3>Végeredmény</h3>
+          <div class="table-wrap">
+            <table class="standings-table">
+              <thead>
+                <tr>
+                  <th class="num">#</th>
+                  <th>Név</th>
+                  ${columns.map(c => `<th class="${getColumnHeaderClass(c)}">${labels[c]}</th>`).join("")}
+                  <th class="num compact-head">${labels.starts}</th>
+                </tr>
+              </thead>
+              <tbody>
+                ${standings.map((row, index) => renderStandingRow(row, index, standings, columns, playerCount, derived)).join("")}
+              </tbody>
+            </table>
+          </div>
+        </section>
+      `;
+    }
+
+    function renderStandingRow(row, index, standings, columns, playerCount, derived) {
+      const playerId = row.player_id;
+      const tv = row.tiebreak_values || {};
+      const name = row.player_name || row.playerName || row.name || "";
+      const cells = columns.map(col => {
+        let value = "";
+
+        if (col === "wins") value = row.wins ?? tv.wins ?? row.total_points ?? "";
+        if (col === "buchholzCut") value = tv.opponent_points_drop_worst ?? "";
+        if (col === "buchholzMedian") value = tv.opponent_points_drop_best_worst ?? "";
+        if (col === "pointDifference") value = tv.point_difference ?? derived.pointDiff[playerId] ?? "";
+        if (col === "headToHead") value = getHeadToHeadText(row, standings, playerCount, derived);
+
+        const cls = getColumnCellClass(col, value);
+        return `<td class="${cls}">${formatCellValue(col, value)}</td>`;
+      }).join("");
+
+      return `
+        <tr>
+          <td class="num rank">${index + 1}.</td>
+          <td class="">${escapeHtml(name)}</td>
+          ${cells}
+          <td class="num">${row.starts_count ?? derived.starts[playerId] ?? ""}</td>
+        </tr>
+      `;
+    }
+
+	function renderRounds(t) {
+	  const rounds = getRounds(t);
+	  if (!rounds.length) return "";
+
+	  const selectedRound = rounds.find(r => r.round_number === selectedRoundNumber) || rounds[0];
+
+	  const matches = selectedRound.matches || [];
+	  const normalMatches = matches.filter(m => (m.results || []).length > 1);
+	  const byeMatches = matches.filter(m => (m.results || []).length === 1);
+
+	  const rows = [
+		...normalMatches.map((match, index) => renderMatchRow(match, index + 1)),
+		...byeMatches.map(match => renderMatchRow(match, null))
+	  ].join("");
+
+	  return `
+		<section class="card">
+		  <h3>Fordulók és eredmények</h3>
+		  <div class="round-tabs">
+			${rounds.map(r => `
+			  <button class="round-tab ${r.round_number === selectedRound.round_number ? "active" : ""}" data-round-number="${r.round_number}">
+				${r.round_number}. forduló
+			  </button>
+			`).join("")}
+		  </div>
+
+		  <div class="table-wrap">
+			<table class="rounds-table">
+			  <thead>
+				<tr>
+				  <th>Asztal</th>
+				  <th>Kezdőjátékos</th>
+				  <th>Második játékos</th>
+				  <th>Eredmény</th>
+				</tr>
+			  </thead>
+			  <tbody>
+				${rows}
+			  </tbody>
+			</table>
+		  </div>
+		</section>
+	  `;
+	}
+
+	function renderMatchRow(match, displayTableNumber) {
+	  const results = match.results || [];
+	  const isBye = results.length === 1;
+
+	  if (isBye) {
+		const p = results[0];
+		return `
+		  <tr>
+			<td></td>
+			<td>${escapeHtml(p.player_name || p.name || "")}</td>
+			<td class="bye">pihen</td>
+			<td>–</td>
+		  </tr>
+		`;
+	  }
+
+	  const first = results.find(r => r.player_id === match.first_player_id) || results[0];
+	  const second = results.find(r => r.player_id !== match.first_player_id) || results[1];
+
+	  const firstPoints = Number(first?.points ?? 0);
+	  const secondPoints = Number(second?.points ?? 0);
+
+	  const firstWon = firstPoints > secondPoints;
+	  const secondWon = secondPoints > firstPoints;
+
+	  const firstName = escapeHtml(first?.player_name || first?.name || "");
+	  const secondName = escapeHtml(second?.player_name || second?.name || "");
+
+	  return `
+		<tr>
+		  <td>${displayTableNumber ?? ""}</td>
+		  <td class="${firstWon ? "match-winner" : ""}">${firstName}</td>
+		  <td class="${secondWon ? "match-winner" : ""}">${secondName}</td>
+		  <td>${escapeHtml(`${firstPoints}–${secondPoints}`)}</td>
+		</tr>
+	  `;
+	}
+
+    function getTiebreakColumns(playerCount) {
+      if (playerCount <= 3) {
+        return ["wins", "pointDifference"];
+      }
+
+      if (playerCount <= 6) {
+        return ["wins", "headToHead", "pointDifference"];
+      }
+
+      return ["wins", "buchholzCut", "buchholzMedian", "headToHead", "pointDifference"];
+    }
+
+    function getHeadToHeadText(row, standings, playerCount, derived) {
+      if (playerCount <= 3) return "";
+
+      const rowTv = row.tiebreak_values || {};
+      const relevantOpponents = standings.filter(other => {
+        if (other.player_id === row.player_id) return false;
+        const otherTv = other.tiebreak_values || {};
+
+        if ((row.wins ?? rowTv.wins) !== (other.wins ?? otherTv.wins)) return false;
+
+        if (playerCount >= 7) {
+          if ((rowTv.opponent_points_drop_worst ?? "") !== (otherTv.opponent_points_drop_worst ?? "")) return false;
+          if ((rowTv.opponent_points_drop_best_worst ?? "") !== (otherTv.opponent_points_drop_best_worst ?? "")) return false;
+        }
+
+        return !!derived.headToHead[`${row.player_id}-${other.player_id}`];
+      });
+
+      if (!relevantOpponents.length) return "";
+
+      const resultOrder = { win: 1, draw: 2, loss: 3 };
+
+      return relevantOpponents
+        .map(other => {
+          const h2h = derived.headToHead[`${row.player_id}-${other.player_id}`];
+          const otherName = escapeHtml(other.player_name || other.name || "");
+          if (!h2h) return null;
+          if (h2h.result === "win") {
+            return { order: resultOrder.win, html: `<span class="h2h-win">Győzelem ${otherName} ellen</span>` };
+          }
+          if (h2h.result === "loss") {
+            return { order: resultOrder.loss, html: `<span class="h2h-loss">Vereség ${otherName} ellen</span>` };
+          }
+          return { order: resultOrder.draw, html: `<span class="h2h-draw">Döntetlen ${otherName} ellen</span>` };
+        })
+        .filter(Boolean)
+        .sort((a, b) => a.order - b.order)
+        .map(item => item.html)
+        .join("");
+    }
+
+	function isDummyPlayer(p) {
+	  const name = (p.name || p.player_name || "").trim();
+	  return name === "Dummy" || name === "Dummy2";
+	}
+
+	function getRealPlayers(t) {
+	  return (t.players || []).filter(p => !isDummyPlayer(p));
+	}
+
+	function getRealPlayerCount(t) {
+	  return getRealPlayers(t).length;
+	}
+
+	function isCancelledTournament(t) {
+	  return getRealPlayerCount(t) < 2;
+	}
+
+	function hasResults(t) {
+		return getRounds(t).length > 0;
+	}
+
+	function getTournamentFormatText(t) {
+	  const base = `${getTournamentSystemLabel(t)}, ${t.number_of_rounds} forduló`;
+
+	  if (t.type === "final") {
+		return `${base} + rájátszás (elődöntő, döntő)`;
+	  }
+
+	  return base;
+	}
+
+    function deriveStats(t) {
+      const pointDiff = {};
+      const starts = {};
+      const headToHead = {};
+
+      for (const p of t.players || []) {
+        pointDiff[p.id] = 0;
+        starts[p.id] = 0;
+      }
+
+      for (const round of getRounds(t)) {
+        for (const match of round.matches || []) {
+          const results = match.results || [];
+
+          if (match.first_player_id != null) {
+            starts[match.first_player_id] = (starts[match.first_player_id] || 0) + 1;
+          }
+
+          if (results.length !== 2) continue;
+
+          const [a, b] = results;
+          const aPoints = Number(a.points || 0);
+          const bPoints = Number(b.points || 0);
+
+          pointDiff[a.player_id] = (pointDiff[a.player_id] || 0) + (aPoints - bPoints);
+          pointDiff[b.player_id] = (pointDiff[b.player_id] || 0) + (bPoints - aPoints);
+
+          headToHead[`${a.player_id}-${b.player_id}`] = {
+            opponentId: b.player_id,
+            result: aPoints > bPoints ? "win" : (aPoints < bPoints ? "loss" : "draw")
+          };
+
+          headToHead[`${b.player_id}-${a.player_id}`] = {
+            opponentId: a.player_id,
+            result: bPoints > aPoints ? "win" : (bPoints < aPoints ? "loss" : "draw")
+          };
+        }
+      }
+
+      return { pointDiff, starts, headToHead };
+    }
+
+    function getStandings(t) {
+      return t.standings_snapshot?.standings || [];
+    }
+
+    function getRounds(t) {
+      return (t?.rounds || []).slice().sort((a, b) => a.round_number - b.round_number);
+    }
+
+	function getPlayerCount(t) {
+	  return getRealPlayerCount(t) || getStandings(t).length;
+	}
+
+    function getTournamentSystemLabel(t) {
+      return getPlayerCount(t) <= 6 ? "Körmérkőzés" : "Svájci rendszer";
+    }
+
+    function getTournamentDisplayName(t) {
+      return t.place_name || t.name || `Selejtező #${t.id}`;
+    }
+
+	function getPlaceName(t) {
+	  const place = places.find(p => p.id === t.place_id);
+	  return place?.name || "";
+	}
+
+    function getColumnHeaderClass(col) {
+      const classes = [];
+      if (isNumericColumn(col)) classes.push("num");
+      if (col === "buchholzCut" || col === "buchholzMedian" || col === "starts") classes.push("compact-head");
+      if (col === "pointDifference") classes.push("diff-col");
+      return classes.join(" ");
+    }
+
+    function getColumnCellClass(col, value) {
+      if (col === "headToHead") return "head-to-head-cell";
+      if (col === "pointDifference") return pointDiffClass(value) + " diff-col";
+      if (isNumericColumn(col)) return "num";
+      return "";
+    }
+
+    function isNumericColumn(col) {
+      return ["wins", "buchholzCut", "buchholzMedian", "pointDifference"].includes(col);
+    }
+
+    function formatCellValue(col, value) {
+      if (value === null || value === undefined || value === "") return "";
+      if (col === "headToHead") return String(value);
+      if (col === "pointDifference") {
+        const n = Number(value);
+        if (Number.isFinite(n) && n > 0) return `+${n}`;
+      }
+      return escapeHtml(String(value));
+    }
+
+    function pointDiffClass(value) {
+      const n = Number(value);
+      if (!Number.isFinite(n)) return "num";
+      if (n > 0) return "num positive";
+      if (n < 0) return "num negative";
+      return "num";
+    }
+
+    function formatDate(dateString) {
+      if (!dateString) return "Dátum nélkül";
+      const [y, m, d] = dateString.split("-").map(Number);
+      if (!y || !m || !d) return dateString;
+      return new Intl.DateTimeFormat("hu-HU", {
+        year: "numeric",
+        month: "long",
+        day: "numeric"
+      }).format(new Date(y, m - 1, d));
+    }
+
+    function statusLabel(status) {
+      const map = {
+        completed: "lezárva",
+        in_progress: "folyamatban",
+        pending: "előkészítés alatt"
+      };
+      return map[status] || status || "";
+    }
+
+    function escapeHtml(value) {
+      return String(value)
+        .replaceAll("&", "&amp;")
+        .replaceAll("<", "&lt;")
+        .replaceAll(">", "&gt;")
+        .replaceAll('"', "&quot;")
+        .replaceAll("'", "&#039;");
+    }
+  </script>
+</body>
+</html>
