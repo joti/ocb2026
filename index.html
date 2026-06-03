@@ -210,7 +210,6 @@
       min-width: 600px;
       table-layout: auto;
     }
-
 	
     .standings-table th:nth-child(1),
     .standings-table td:nth-child(1) {
@@ -266,6 +265,15 @@
       min-width: 74px;
       font-size: .87rem;
     }
+
+	.participants-table th,
+	.participants-table td {
+	  text-align: left !important;
+	}
+
+	.participant-name {
+	  font-weight: 500;
+	}
 
     th {
       background: #f1f5ec;
@@ -457,6 +465,26 @@
 	  .qualifiers-section {
 		  display: none;
 	  }
+
+	  .participants-table {
+		  table-layout: fixed;
+	  }
+
+	  .participants-table th:nth-child(1),
+	  .participants-table td:nth-child(1) {
+	    width: 50px;
+	  }
+
+	  .participants-table th:nth-child(2),
+	  .participants-table td:nth-child(2) {
+		  width: 200px;
+	  }
+
+	  .participants-table th:nth-child(3),
+	  .participants-table td:nth-child(3) {
+		  width: auto;
+	  }
+
 	  
     }
   </style>
@@ -685,19 +713,25 @@
 		<section class="card">
 		  <h3>Résztvevők</h3>
 		  <div class="table-wrap">
-			<table class="standings-table">
+			<table class="standings-table participants-table">
 			  <thead>
 				<tr>
-				  <th class="num">#</th>
-				  <th>Név</th>
+					<th class="num">#</th>
+					<th>Név</th>
+					${t.type === "final" ? "<th>Kvalifikáció</th>" : ""}
 				</tr>
 			  </thead>
 			  <tbody>
 				${players.map((p, index) => `
-				  <tr>
-					<td class="num">${index + 1}.</td>
-					<td>${escapeHtml(p.name)}</td>
-				  </tr>
+				<tr>
+				  <td class="num">${index + 1}.</td>
+				  <td class="participant-name">${escapeHtml(p.name)}</td>
+				  ${
+					t.type === "final"
+					  ? `<td>${escapeHtml(p.qualification || "")}</td>`
+					  : ""
+				  }
+				</tr>				  
 				`).join("")}
 			  </tbody>
 			</table>
