@@ -19928,6 +19928,15 @@
 						"dropout_round": null
 					},
 					{
+						"id": 87,
+						"name": "Földeáki-Elek Ágnes",
+						"bga_username": null,
+						"display_preference": "name",
+						"qualification": "Nagyoroszi selejtező",
+						"active": 1,
+						"dropout_round": null
+					},
+					{
 						"id": 134,
 						"name": "Hugyecz Ákos",
 						"bga_username": null,
