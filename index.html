@@ -503,6 +503,7 @@
 
     const labels = {
       wins: "Győzelmek",
+      timeouts: "Időtúllépések",
       buchholzCut: "Buchholz <br>cut",
       buchholzMedian: "Buchholz <br>median",
       headToHead: "Egymás elleni",
@@ -573,7 +574,7 @@
 			${hasResults(selected)
 				? renderStandings(selected)
 				: renderParticipants(selected)}		
-			${getRounds(selected).length
+			${getRounds(selected).length || selected.bga_tournament_url
 				? renderRounds(selected)
 				: ""}				
           </main>
@@ -743,7 +744,13 @@
     function renderStandings(t) {
       const standings = getStandings(t);
       const playerCount = getPlayerCount(t);
-      const columns = getTiebreakColumns(playerCount);
+	  
+	  const isOnline =
+		  t.config?.tiebreak_criteria?.some(c =>
+			c.id === "timeouts" && c.enabled
+		  );	  
+	  
+      const columns = getTiebreakColumns(playerCount, isOnline);
       const derived = deriveStats(t);
 
       return `
@@ -776,6 +783,7 @@
         let value = "";
 
         if (col === "wins") value = row.wins ?? tv.wins ?? row.total_points ?? "";
+		if (col === "timeouts") value = tv.timeouts ?? row.timeouts ?? "";
         if (col === "buchholzCut") value = tv.opponent_points_drop_worst ?? "";
         if (col === "buchholzMedian") value = tv.opponent_points_drop_best_worst ?? "";
         if (col === "pointDifference") value = tv.point_difference ?? derived.pointDiff[playerId] ?? "";
@@ -796,6 +804,23 @@
     }
 
 	function renderRounds(t) {
+
+	  if (t.bga_tournament_url) {
+		  return `
+			<section class="card">
+			  <h2>Fordulók és eredmények</h2>
+			  <p>
+				A játszmák eredményei a Board Game Arena versenyoldalán érhetők el.
+			  </p>
+			  <p>
+				<a href="${t.bga_tournament_url}" target="_blank" rel="noopener">
+				  Eredmények megtekintése a BGA-n
+				</a>
+			  </p>
+			</section>
+		  `;
+	  }
+
 	  const rounds = getRounds(t);
 	  if (!rounds.length) return "";
 
@@ -878,7 +903,7 @@
 	  `;
 	}
 
-    function getTiebreakColumns(playerCount) {
+    function getTiebreakColumns(playerCount, isOnline) {
       if (playerCount <= 3) {
         return ["wins", "pointDifference"];
       }
@@ -886,6 +911,10 @@
       if (playerCount <= 6) {
         return ["wins", "headToHead", "pointDifference"];
       }
+
+      if (isOnline) {
+        return ["wins", "timeouts", "buchholzCut", "buchholzMedian", "pointDifference"];
+	  }	
 
       return ["wins", "buchholzCut", "buchholzMedian", "headToHead", "pointDifference"];
     }
@@ -949,7 +978,7 @@
 	}
 
 	function hasResults(t) {
-		return getRounds(t).length > 0;
+	  return getStandings(t).length > 0;
 	}
 
 	function getTournamentFormatText(t) {
@@ -1045,7 +1074,7 @@
     }
 
     function isNumericColumn(col) {
-      return ["wins", "buchholzCut", "buchholzMedian", "pointDifference"].includes(col);
+      return ["wins", "timeouts", "buchholzCut", "buchholzMedian", "pointDifference"].includes(col);
     }
 
     function formatCellValue(col, value) {

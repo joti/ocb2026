@@ -4,6 +4,10 @@
 	"data": {
 		"cities": [
 			{
+				"id": 1,
+				"name": "Online"
+			},
+			{
 				"id": 9,
 				"name": "Budapest"
 			},
@@ -90,6 +94,11 @@
 		],	
 
 		"places": [
+			{
+				"id": 1,
+				"city_id": 1,
+				"name": "Board Game Arena"
+			},
 			{
 				"id": 9,
 				"city_id": 9,
@@ -19737,38 +19746,581 @@
 				],
 				"rounds": [],
 				"standings_snapshot": {
-				  "exported_at": "2026-06-02T10:01:08.989Z",
-				  "locale": "hu",
-				  "standings": [
-					{
-					  "player_id": 147,
-					  "player_name": "Dummy",
-					  "total_points": 0,
-					  "matches_played": 0,
-					  "wins": 0,
-					  "tiebreak_values": {
-						"wins": 0
-					  },
-					  "active": 1,
-					  "dropout_round": null,
-					  "starts_count": 0
+			    }
+			},
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+			{
+				"id": 60,
+				"name": "OCB26",
+				"type": "qualifier",
+				"circuit_id": null,
+				"date": "2026-06-07",
+				"status": "completed",
+				"players_per_match": 2,
+				"number_of_rounds": 6,
+				"place_id": 1,
+				"circuit_name": null,
+				"place_name": "Online",
+				"bga_tournament_url": "https://boardgamearena.com/tournament?id=569852#overview",				
+				"config": {
+					"id": 60,
+					"tournament_id": 60,
+					"avoid_rematches": true,
+					"tiebreak_criteria": [
+						{
+							"id": "wins",
+							"name": "Número de victorias",
+							"enabled": true,
+							"order": 1
+						},
+						{
+							"id": "timeouts",
+							"name": "Timeouts",
+							"enabled": true,
+							"order": 2
+						},
+						{
+							"id": "opponent_points_drop_worst",
+							"name": "Suma de puntos de oponentes (quitando el peor)",
+							"enabled": true,
+							"order": 3
+						},
+						{
+							"id": "opponent_points_drop_best_worst",
+							"name": "Suma de puntos de oponentes (quitando el mejor y el peor)",
+							"enabled": true,
+							"order": 4
+						},
+						{
+							"id": "head_to_head",
+							"name": "Victoria en enfrentamiento directo",
+							"enabled": true,
+							"order": 5
+						},
+						{
+							"id": "point_difference",
+							"name": "Suma de diferencia de puntos",
+							"enabled": true,
+							"order": 6
+						}
+					],
+					"scoring_system": {
+						"1": 1,
+						"2": 0
 					},
-					{
-					  "player_id": 149,
-					  "player_name": "Dummy2",
-					  "total_points": 0,
-					  "matches_played": 0,
-					  "wins": 0,
-					  "tiebreak_values": {
-						"wins": 0
-					  },
-					  "active": 1,
-					  "dropout_round": null,
-					  "starts_count": 0
-					}
-				  ]
+					"bye_selection": "worst",
+					"player_display_mode": "per_player",
+					"pairing_algorithm": "greedy",
+					"buchholz_bye_mode": "legacy_virtual_worst"
+				},
+				"players": [
+				  {
+					"id": 103,
+					"name": "Kiss Ferenc Emánuel",
+					"bga_username": "kissemo",
+					"display_preference": "name",
+					"active": 1,
+					"dropout_round": null
+				  },
+				  {
+					"id": 97,
+					"name": "Filipszki László",
+					"bga_username": "fillac",
+					"display_preference": "name",
+					"active": 1,
+					"dropout_round": null
+				  },
+				  {
+					"id": 54,
+					"name": "Vodicska Ferenc",
+					"bga_username": "vizecske",
+					"display_preference": "name",
+					"active": 1,
+					"dropout_round": null
+				  },
+				  {
+					"id": 109,
+					"name": "Simeon Zsolt",
+					"bga_username": "Zebedeus",
+					"display_preference": "name",
+					"active": 1,
+					"dropout_round": null
+				  },
+				  {
+					"id": 104,
+					"name": "Kozma Gábor",
+					"bga_username": "HarveyWH",
+					"display_preference": "name",
+					"active": 1,
+					"dropout_round": null
+				  },
+				  {
+					"id": 102,
+					"name": "Kiss Ferenc Dusán",
+					"bga_username": "kissduska",
+					"display_preference": "name",
+					"active": 1,
+					"dropout_round": null
+				  },
+				  {
+					"id": 98,
+					"name": "Gaál Attila",
+					"bga_username": "kingadomino",
+					"display_preference": "name",
+					"active": 1,
+					"dropout_round": null
+				  },
+				  {
+					"id": 135,
+					"name": "Papp Istvánné",
+					"bga_username": "Maricusi",
+					"display_preference": "name",
+					"active": 1,
+					"dropout_round": null
+				  },
+				  {
+					"id": 106,
+					"name": "Majoross Kinga",
+					"bga_username": "majorossk",
+					"display_preference": "name",
+					"active": 1,
+					"dropout_round": null
+				  },
+				  {
+					"id": 151,
+					"name": "Gellér Árpád",
+					"bga_username": "Gerpi",
+					"display_preference": "name",
+					"active": 1,
+					"dropout_round": null
+				  },
+				  {
+					"id": 99,
+					"name": "Géczi Péter Attila",
+					"bga_username": "SilexSaxum",
+					"display_preference": "name",
+					"active": 1,
+					"dropout_round": null
+				  },
+				  {
+					"id": 114,
+					"name": "Varga Csilla",
+					"bga_username": "vallics",
+					"display_preference": "name",
+					"active": 1,
+					"dropout_round": null
+				  },
+				  {
+					"id": 152,
+					"name": "Dávid Gábor",
+					"bga_username": "Gubbancsfej",
+					"display_preference": "name",
+					"active": 1,
+					"dropout_round": null
+				  },
+				  {
+					"id": 153,
+					"name": "Pazsák Zsófia",
+					"bga_username": "Cinderella_23",
+					"display_preference": "name",
+					"active": 1,
+					"dropout_round": null
+				  },
+				  {
+					"id": 100,
+					"name": "Ihász Levente Gyula",
+					"bga_username": "ihaszlevente",
+					"display_preference": "name",
+					"active": 1,
+					"dropout_round": null
+				  },
+				  {
+					"id": 40,
+					"name": "Smahulya Bence",
+					"bga_username": "Smahuka",
+					"display_preference": "name",
+					"active": 1,
+					"dropout_round": null
+				  },
+				  {
+					"id": 95,
+					"name": "Csengeri Zsolt",
+					"bga_username": "cszs",
+					"display_preference": "name",
+					"active": 1,
+					"dropout_round": null
+				  },
+				  {
+					"id": 150,
+					"name": "Duli Dániel",
+					"bga_username": "doolee_d",
+					"display_preference": "name",
+					"active": 0,
+					"dropout_round": 5
+				  }				
+				],
+				"rounds": [
+				],
+				"standings_snapshot": {
+					"exported_at": "2026-06-08T00:00:00.000Z",
+					"locale": "hu",
+					"standings": [
+						{
+						  "player_id": 103,
+						  "player_name": "Kiss Ferenc Emánuel",
+						  "total_points": 5,
+						  "matches_played": 6,
+						  "wins": 5,
+						  "tiebreak_values": {
+							"wins": 5,
+							"timeouts": 0,
+							"opponent_points_drop_worst": 22,
+							"opponent_points_drop_best_worst": 17,
+							"head_to_head": 0,
+							"point_difference": 106
+						  },
+						  "active": 1,
+						  "dropout_round": null,
+						  "starts_count": null
+						},
+						{
+						  "player_id": 97,
+						  "player_name": "Filipszki László",
+						  "total_points": 5,
+						  "matches_played": 6,
+						  "wins": 5,
+						  "tiebreak_values": {
+							"wins": 5,
+							"timeouts": 0,
+							"opponent_points_drop_worst": 21,
+							"opponent_points_drop_best_worst": 16,
+							"head_to_head": 0,
+							"point_difference": 61
+						  },
+						  "active": 1,
+						  "dropout_round": null,
+						  "starts_count": null
+						},
+						{
+						  "player_id": 54,
+						  "player_name": "Vodicska Ferenc",
+						  "total_points": 5,
+						  "matches_played": 6,
+						  "wins": 5,
+						  "tiebreak_values": {
+							"wins": 5,
+							"timeouts": 0,
+							"opponent_points_drop_worst": 19,
+							"opponent_points_drop_best_worst": 14,
+							"head_to_head": 0,
+							"point_difference": 110
+						  },
+						  "active": 1,
+						  "dropout_round": null,
+						  "starts_count": null
+						},
+						{
+						  "player_id": 109,
+						  "player_name": "Simeon Zsolt",
+						  "total_points": 4,
+						  "matches_played": 6,
+						  "wins": 4,
+						  "tiebreak_values": {
+							"wins": 4,
+							"timeouts": 0,
+							"opponent_points_drop_worst": 19,
+							"opponent_points_drop_best_worst": 14,
+							"head_to_head": 0,
+							"point_difference": 21
+						  },
+						  "active": 1,
+						  "dropout_round": null,
+						  "starts_count": null
+						},
+						{
+						  "player_id": 104,
+						  "player_name": "Kozma Gábor",
+						  "total_points": 4,
+						  "matches_played": 6,
+						  "wins": 4,
+						  "tiebreak_values": {
+							"wins": 4,
+							"timeouts": 0,
+							"opponent_points_drop_worst": 16.5,
+							"opponent_points_drop_best_worst": 11.5,
+							"head_to_head": 0,
+							"point_difference": 49
+						  },
+						  "active": 1,
+						  "dropout_round": null,
+						  "starts_count": null
+						},
+						{
+						  "player_id": 102,
+						  "player_name": "Kiss Ferenc Dusán",
+						  "total_points": 4,
+						  "matches_played": 6,
+						  "wins": 4,
+						  "tiebreak_values": {
+							"wins": 4,
+							"timeouts": 0,
+							"opponent_points_drop_worst": 16,
+							"opponent_points_drop_best_worst": 11,
+							"head_to_head": 0,
+							"point_difference": 14
+						  },
+						  "active": 1,
+						  "dropout_round": null,
+						  "starts_count": null
+						},
+						{
+						  "player_id": 98,
+						  "player_name": "Gaál Attila",
+						  "total_points": 3,
+						  "matches_played": 6,
+						  "wins": 3,
+						  "tiebreak_values": {
+							"wins": 3,
+							"timeouts": 0,
+							"opponent_points_drop_worst": 19,
+							"opponent_points_drop_best_worst": 14,
+							"head_to_head": 0,
+							"point_difference": -6
+						  },
+						  "active": 1,
+						  "dropout_round": null,
+						  "starts_count": null
+						},
+						{
+						  "player_id": 135,
+						  "player_name": "Papp Istvánné",
+						  "total_points": 3,
+						  "matches_played": 6,
+						  "wins": 3,
+						  "tiebreak_values": {
+							"wins": 3,
+							"timeouts": 0,
+							"opponent_points_drop_worst": 16,
+							"opponent_points_drop_best_worst": 11,
+							"head_to_head": 0,
+							"point_difference": -36
+						  },
+						  "active": 1,
+						  "dropout_round": null,
+						  "starts_count": null
+						},
+						{
+						  "player_id": 106,
+						  "player_name": "Majoross Kinga",
+						  "total_points": 3,
+						  "matches_played": 6,
+						  "wins": 3,
+						  "tiebreak_values": {
+							"wins": 3,
+							"timeouts": 0,
+							"opponent_points_drop_worst": 14.5,
+							"opponent_points_drop_best_worst": 9.5,
+							"head_to_head": 0,
+							"point_difference": 6
+						  },
+						  "active": 1,
+						  "dropout_round": null,
+						  "starts_count": null
+						},
+						{
+						  "player_id": 151,
+						  "player_name": "Gellér Árpád",
+						  "total_points": 3,
+						  "matches_played": 6,
+						  "wins": 3,
+						  "tiebreak_values": {
+							"wins": 3,
+							"timeouts": 0,
+							"opponent_points_drop_worst": 14,
+							"opponent_points_drop_best_worst": 10,
+							"head_to_head": 0,
+							"point_difference": 54
+						  },
+						  "active": 1,
+						  "dropout_round": null,
+						  "starts_count": null
+						},
+						{
+						  "player_id": 99,
+						  "player_name": "Géczi Péter Attila",
+						  "total_points": 3,
+						  "matches_played": 6,
+						  "wins": 3,
+						  "tiebreak_values": {
+							"wins": 3,
+							"timeouts": 1,
+							"opponent_points_drop_worst": 17.5,
+							"opponent_points_drop_best_worst": 12.5,
+							"head_to_head": 0,
+							"point_difference": 17
+						  },
+						  "active": 1,
+						  "dropout_round": null,
+						  "starts_count": null
+						},
+						{
+						  "player_id": 114,
+						  "player_name": "Varga Csilla",
+						  "total_points": 2,
+						  "matches_played": 6,
+						  "wins": 2,
+						  "tiebreak_values": {
+							"wins": 2,
+							"timeouts": 0,
+							"opponent_points_drop_worst": 17,
+							"opponent_points_drop_best_worst": 13,
+							"head_to_head": 0,
+							"point_difference": 5
+						  },
+						  "active": 1,
+						  "dropout_round": null,
+						  "starts_count": null
+						},
+						{
+						  "player_id": 152,
+						  "player_name": "Dávid Gábor",
+						  "total_points": 2,
+						  "matches_played": 6,
+						  "wins": 2,
+						  "tiebreak_values": {
+							"wins": 2,
+							"timeouts": 0,
+							"opponent_points_drop_worst": 17,
+							"opponent_points_drop_best_worst": 12,
+							"head_to_head": 0,
+							"point_difference": -38
+						  },
+						  "active": 1,
+						  "dropout_round": null,
+						  "starts_count": null
+						},
+						{
+						  "player_id": 153,
+						  "player_name": "Pazsák Zsófia",
+						  "total_points": 2,
+						  "matches_played": 6,
+						  "wins": 2,
+						  "tiebreak_values": {
+							"wins": 2,
+							"timeouts": 0,
+							"opponent_points_drop_worst": 15,
+							"opponent_points_drop_best_worst": 11,
+							"head_to_head": 0,
+							"point_difference": -69
+						  },
+						  "active": 1,
+						  "dropout_round": null,
+						  "starts_count": null
+						},
+						{
+						  "player_id": 100,
+						  "player_name": "Ihász Levente Gyula",
+						  "total_points": 2,
+						  "matches_played": 6,
+						  "wins": 2,
+						  "tiebreak_values": {
+							"wins": 2,
+							"timeouts": 0,
+							"opponent_points_drop_worst": 15,
+							"opponent_points_drop_best_worst": 11,
+							"head_to_head": 0,
+							"point_difference": -122
+						  },
+						  "active": 1,
+						  "dropout_round": null,
+						  "starts_count": null
+						},
+						{
+						  "player_id": 40,
+						  "player_name": "Smahulya Bence",
+						  "total_points": 2,
+						  "matches_played": 6,
+						  "wins": 2,
+						  "tiebreak_values": {
+							"wins": 2,
+							"timeouts": 0,
+							"opponent_points_drop_worst": 12.5,
+							"opponent_points_drop_best_worst": 8.5,
+							"head_to_head": 0,
+							"point_difference": -81
+						  },
+						  "active": 1,
+						  "dropout_round": null,
+						  "starts_count": null
+						},
+						{
+						  "player_id": 95,
+						  "player_name": "Csengeri Zsolt",
+						  "total_points": 2,
+						  "matches_played": 6,
+						  "wins": 2,
+						  "tiebreak_values": {
+							"wins": 2,
+							"timeouts": 0,
+							"opponent_points_drop_worst": 11.5,
+							"opponent_points_drop_best_worst": 8.5,
+							"head_to_head": 0,
+							"point_difference": 9
+						  },
+						  "active": 1,
+						  "dropout_round": null,
+						  "starts_count": null
+						},
+						{
+						  "player_id": 150,
+						  "player_name": "Duli Dániel",
+						  "total_points": 0,
+						  "matches_played": 4,
+						  "wins": 0,
+						  "tiebreak_values": {
+							"wins": 0,
+							"timeouts": 3,
+							"opponent_points_drop_worst": 9,
+							"opponent_points_drop_best_worst": 5,
+							"head_to_head": 0,
+							"point_difference": -100
+						  },
+						  "active": 0,
+						  "dropout_round": 5,
+						  "starts_count": null
+						}
+				    ]
 				}
 			},
+
+
+
+
+
+
+
+
 
 			{
 				"id": 2026,
