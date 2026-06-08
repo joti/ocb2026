@@ -20018,6 +20018,15 @@
 						"dropout_round": null
 					},
 					{
+						"id": 103,
+						"name": "Kiss Ferenc Emánuel",
+						"bga_username": null,
+						"display_preference": "name",
+						"qualification": "Online selejtező",
+						"active": 1,
+						"dropout_round": null
+					},
+					{
 						"id": 144,
 						"name": "Illés Róbert",
 						"bga_username": null,
