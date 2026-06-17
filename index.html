@@ -1078,7 +1078,7 @@
 	  const secondPoints = Number(second?.points ?? 0);
 
 	  const firstWon = firstPoints > secondPoints;
-	  const secondWon = secondPoints > firstPoints;
+	  const secondWon = secondPoints >= firstPoints;
 
 	  const firstName = escapeHtml(first?.player_name || first?.name || "");
 	  const secondName = escapeHtml(second?.player_name || second?.name || "");
