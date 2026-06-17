@@ -409,6 +409,71 @@
       border-radius: 12px;
     }
 
+	.group-header {
+	  text-align: center !important;
+	  background: #ffffff;
+	  font-weight: 800;
+	  color: var(--black);
+	  border-bottom: 1px solid var(--line);
+	}
+
+	.standings-table thead tr:first-child th {
+	  vertical-align: middle;
+	}
+
+	.final-standings-table {
+	  min-width: 100%;
+	  table-layout: fixed;
+	}
+
+	.final-standings-table th,
+	.final-standings-table td {
+	  font-size: 0.9rem;
+	  white-space: normal;
+	  text-align: center !important;
+	}
+
+	.final-standings-table .final-rank-col {
+	  width: 46px !important;
+	  text-align: right !important;
+	}
+
+	.final-standings-table .final-name-col {
+	  width: 180px !important;
+	  text-align: left !important;
+	}
+
+	.final-standings-table .swiss-rank-col {
+	  width: 78px !important;
+	}
+
+	.final-standings-table .wins-col {
+	  width: 78px !important;
+	}
+
+	.final-standings-table .buchholz-cut-col,
+	.final-standings-table .buchholz-median-col {
+	  width: 92px !important;
+	}
+
+	.final-standings-table .head-to-head-final-col {
+	  width: 120px !important;
+	}
+
+	.final-standings-table .point-diff-final-col {
+	  width: 96px !important;
+	}
+
+	.final-standings-table .starts-col {
+	  width: 72px !important;
+	}
+
+	.final-standings-table .group-header {
+	  text-align: center !important;
+	  background: #f1f5ec;
+	  font-weight: 800;
+	}
+
 	.mobile-tournament-select {
 	  display: none;
 	}
@@ -514,6 +579,7 @@
     let tournaments = [];
     let selectedTournamentId = null;
     let selectedRoundNumber = null;
+	let selectedFinalView = "finalStandings";	
 	let places = [];
 	let cities = [];
 
@@ -571,9 +637,9 @@
 
           <main class="content">
             ${renderTournamentHeader(selected)}
-			${hasResults(selected)
-				? renderStandings(selected)
-				: renderParticipants(selected)}		
+			
+			${renderMainResultBlock(selected)}				
+
 			${getRounds(selected).length || selected.bga_tournament_url
 				? renderRounds(selected)
 				: ""}				
@@ -606,7 +672,107 @@
           render();
         });
       });
+	  
+	  document.querySelectorAll("[data-final-view]").forEach(btn => {
+		  btn.addEventListener("click", () => {
+			selectedFinalView = btn.dataset.finalView;
+			render();
+		  });
+	  });
+	  
     }
+
+	function renderMainResultBlock(t) {
+	  if (t.type !== "final") {
+		return hasResults(t)
+		  ? renderStandings(t)
+		  : renderParticipants(t);
+	  }
+
+	  return `
+		<section class="card">
+		  <div class="round-tabs">
+			<button class="round-tab ${selectedFinalView === "finalStandings" ? "active" : ""}" data-final-view="finalStandings">
+			  Végeredmény
+			</button>
+			<button class="round-tab ${selectedFinalView === "participants" ? "active" : ""}" data-final-view="participants">
+			  Résztvevők
+			</button>
+		  </div>
+
+		  ${selectedFinalView === "participants"
+			? renderParticipantsTable(t)
+			: renderFinalStandingsTable(t)}
+		</section>
+	  `;
+	}
+
+	function getFinalColumnClass(col) {
+	  const map = {
+		wins: "wins-col",
+		buchholzCut: "buchholz-cut-col",
+		buchholzMedian: "buchholz-median-col",
+		headToHead: "head-to-head-final-col",
+		pointDifference: "point-diff-final-col",
+		timeouts: "timeouts-col"
+	  };
+
+	  return map[col] || "";
+	}
+
+	function renderFinalStandingsTable(t) {
+	  const standings = getFinalStandings(t);
+	  const playerCount = getPlayerCount(t);
+	  const columns = getTiebreakColumns(playerCount, false);
+	  const derived = deriveSwissStats(t);
+
+	  return `
+		<div class="table-wrap">
+		  <table class="standings-table final-standings-table">
+			<thead>
+			  <tr>
+				<th class="final-rank-col" rowspan="2">#</th>
+				<th class="final-name-col" rowspan="2">Név</th>
+				<th class="group-header" colspan="${columns.length + 2}">Alapszakasz</th>
+			  </tr>
+			  <tr>
+				<th class="swiss-rank-col">Helyezés</th>
+				${columns.map(c => `<th class="${getFinalColumnClass(c)}">${labels[c]}</th>`).join("")}
+				<th class="starts-col">${labels.starts}</th>
+			  </tr>
+			</thead>
+			<tbody>
+			  ${standings.map((item, index) => {
+				const row = item.swissRow;
+				const tv = row?.tiebreak_values || {};
+
+				const cells = columns.map(col => {
+				  let value = "";
+
+				  if (col === "wins") value = row?.wins ?? tv.wins ?? row?.total_points ?? "";
+				  if (col === "buchholzCut") value = tv.opponent_points_drop_worst ?? "";
+				  if (col === "buchholzMedian") value = tv.opponent_points_drop_best_worst ?? "";
+				  if (col === "pointDifference") value = tv.point_difference ?? derived.pointDiff[item.playerId] ?? "";
+				  if (col === "headToHead") value = getHeadToHeadText(row, getStandings(t), playerCount, derived);
+
+				  return `<td class="${getFinalColumnClass(col)}">${formatCellValue(col, value)}</td>`;
+				}).join("");
+
+				return `
+				  <tr>
+					<td class="final-rank-col rank">${index + 1}.</td>
+					<td class="final-name-col">${escapeHtml(item.name)}</td>
+					<td class="swiss-rank-col muted">${item.swissRank ? item.swissRank + "." : ""}</td>
+					${cells}
+					<td class="starts-col">${row?.starts_count ?? derived.starts[item.playerId] ?? ""}</td>
+				  </tr>
+				`;
+			  }).join("")}
+			</tbody>
+		  </table>
+		</div>
+	  `;
+	}
 
 	function renderTournamentSelector(selectedId) {
 	  const finals = tournaments.filter(t => t.type === "final");
@@ -706,38 +872,40 @@
     }
 
 	function renderParticipants(t) {
+	  return `
+		<section class="card">
+		  <h3>Résztvevők</h3>
+		  ${renderParticipantsTable(t)}
+		</section>
+	  `;
+	}
+
+	function renderParticipantsTable(t) {
 	  const players = getRealPlayers(t)
 		.slice()
 		.sort((a, b) => a.name.localeCompare(b.name, "hu"));
 
 	  return `
-		<section class="card">
-		  <h3>Résztvevők</h3>
-		  <div class="table-wrap">
-			<table class="standings-table participants-table">
-			  <thead>
-				<tr>
-					<th class="num">#</th>
-					<th>Név</th>
-					${t.type === "final" ? "<th>Kvalifikáció</th>" : ""}
-				</tr>
-			  </thead>
-			  <tbody>
-				${players.map((p, index) => `
+		<div class="table-wrap">
+		  <table class="standings-table participants-table">
+			<thead>
+			  <tr>
+				<th class="num">#</th>
+				<th>Név</th>
+				${t.type === "final" ? "<th>Kvalifikáció</th>" : ""}
+			  </tr>
+			</thead>
+			<tbody>
+			  ${players.map((p, index) => `
 				<tr>
 				  <td class="num">${index + 1}.</td>
 				  <td class="participant-name">${escapeHtml(p.name)}</td>
-				  ${
-					t.type === "final"
-					  ? `<td>${escapeHtml(p.qualification || "")}</td>`
-					  : ""
-				  }
-				</tr>				  
-				`).join("")}
-			  </tbody>
-			</table>
-		  </div>
-		</section>
+				  ${t.type === "final" ? `<td>${escapeHtml(p.qualification || "")}</td>` : ""}
+				</tr>
+			  `).join("")}
+			</tbody>
+		  </table>
+		</div>
 	  `;
 	}
 
@@ -839,11 +1007,26 @@
 		<section class="card">
 		  <h3>Fordulók és eredmények</h3>
 		  <div class="round-tabs">
-			${rounds.map(r => `
-			  <button class="round-tab ${r.round_number === selectedRound.round_number ? "active" : ""}" data-round-number="${r.round_number}">
-				${r.round_number}. forduló
-			  </button>
-			`).join("")}
+			${rounds.map(r => {
+			  let label = `${r.round_number}. forduló`;
+
+			  if (r.phase === "knockout") {
+				if (r.knockout_stage === "semifinal") {
+				  label = "Elődöntők";
+				} else {
+				  label = "Helyosztók";
+				}
+			  }
+
+			  return `
+				<button
+				  class="round-tab ${r.round_number === selectedRound.round_number ? "active" : ""}"
+				  data-round-number="${r.round_number}">
+				  ${label}
+				</button>
+			  `;
+			}).join("")}
+			
 		  </div>
 
 		  <div class="table-wrap">
@@ -901,6 +1084,81 @@
 		  <td>${escapeHtml(`${firstPoints}–${secondPoints}`)}</td>
 		</tr>
 	  `;
+	}
+
+	function getFinalStandings(t) {
+	  const swissStandings = getStandings(t);
+	  const players = getRealPlayers(t);
+
+	  const swissByPlayerId = new Map(
+		swissStandings.map((row, index) => [
+		  row.player_id,
+		  {
+			row,
+			rank: index + 1
+		  }
+		])
+	  );
+
+	  const playersById = new Map(players.map(p => [p.id, p]));
+
+	  const finalRound = getRounds(t).find(r =>
+		r.phase === "knockout" &&
+		(r.knockout_stage === "playoff" || r.knockout_stage === "final")
+	  );
+
+	  const finalMatch = finalRound?.matches?.find(m => m.knockout_match_stage === "final");
+	  const bronzeMatch = finalRound?.matches?.find(m => m.knockout_match_stage === "third_place");
+
+	  const orderedPlayerIds = [];
+
+	  if (finalMatch) {
+		const winnerId = finalMatch.series_winner_id || getMatchWinnerId(finalMatch);
+		const loserId = getMatchLoserId(finalMatch, winnerId);
+		orderedPlayerIds.push(winnerId, loserId);
+	  }
+
+	  if (bronzeMatch) {
+		const winnerId = bronzeMatch.series_winner_id || getMatchWinnerId(bronzeMatch);
+		const loserId = getMatchLoserId(bronzeMatch, winnerId);
+		orderedPlayerIds.push(winnerId, loserId);
+	  }
+
+	  for (const row of swissStandings) {
+		if (!orderedPlayerIds.includes(row.player_id)) {
+		  orderedPlayerIds.push(row.player_id);
+		}
+	  }
+
+	  return orderedPlayerIds.map(playerId => {
+		const swiss = swissByPlayerId.get(playerId);
+		const player = playersById.get(playerId);
+
+		return {
+		  playerId,
+		  name: swiss?.row?.player_name || player?.name || "",
+		  player,
+		  swissRow: swiss?.row,
+		  swissRank: swiss?.rank
+		};
+	  });
+	}
+
+	function getMatchWinnerId(match) {
+	  const results = match.results || [];
+	  if (results.length !== 2) return null;
+
+	  const [a, b] = results;
+	  if (Number(a.points) > Number(b.points)) return a.player_id;
+	  if (Number(b.points) > Number(a.points)) return b.player_id;
+
+	  return match.series_winner_id || null;
+	}
+
+	function getMatchLoserId(match, winnerId) {
+	  return (match.results || [])
+		.map(r => r.player_id)
+		.find(id => id !== winnerId) || null;
 	}
 
     function getTiebreakColumns(playerCount, isOnline) {
@@ -991,6 +1249,15 @@
 	  return base;
 	}
 
+	function deriveSwissStats(t) {
+	  const swissOnlyTournament = {
+		...t,
+		rounds: getRounds(t).filter(r => r.phase !== "knockout")
+	  };
+
+	  return deriveStats(swissOnlyTournament);
+	}
+
     function deriveStats(t) {
       const pointDiff = {};
       const starts = {};
@@ -1033,9 +1300,12 @@
       return { pointDiff, starts, headToHead };
     }
 
-    function getStandings(t) {
-      return t.standings_snapshot?.standings || [];
-    }
+	function getStandings(t) {
+	  return (t.standings_snapshot?.standings || [])
+		.filter(row => !isDummyPlayer({
+		  name: row.player_name || row.name || ""
+		}));
+	}
 
     function getRounds(t) {
       return (t?.rounds || []).slice().sort((a, b) => a.round_number - b.round_number);
